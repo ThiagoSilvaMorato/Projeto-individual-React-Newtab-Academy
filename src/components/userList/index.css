@@ -1,0 +1,24 @@
+.userList {
+  background-color: #2b2d42;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  margin-bottom: 2px;
+}
+
+.userList .userData {
+  display: inherit;
+  align-items: center;
+}
+
+.userData img {
+  border-radius: 50%;
+}
+
+.userData .userProfile {
+  display: inherit;
+  flex-direction: column;
+  padding-left: 20px;
+}
