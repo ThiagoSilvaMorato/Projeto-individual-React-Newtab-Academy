@@ -14,7 +14,7 @@ export function UserList(props) {
         </div>
       </div>
       <div>
-        <button>Pagar</button>
+        <button onClick={props.onClick}>Pagar</button>
       </div>
     </div>
   );

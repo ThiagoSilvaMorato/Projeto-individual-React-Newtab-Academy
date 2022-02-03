@@ -22,3 +22,11 @@
   flex-direction: column;
   padding-left: 20px;
 }
+
+.userList button {
+  cursor: pointer;
+}
+
+.userList button:hover {
+  filter: brightness(1.3);
+}
