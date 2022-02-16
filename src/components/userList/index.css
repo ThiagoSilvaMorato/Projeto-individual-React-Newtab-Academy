@@ -25,6 +25,7 @@
 
 .userList button {
   cursor: pointer;
+  width: 150%;
 }
 
 .userList button:hover {

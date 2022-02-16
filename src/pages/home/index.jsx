@@ -9,6 +9,8 @@ export function Home(props) {
   const [users, setUsers] = useState([]);
   const [isCardModalOpen, setIsCardsModalOpen] = useState(false);
   const [paymentForUser, setPaymentForUser] = useState(null);
+  const [paymentSucced, setPaymentSucced] = useState(false);
+  const [paymentUnsucced, setPaymentUnsucced] = useState(false);
 
   //Coletar dados dos usuários da API
   async function getUsers() {
@@ -35,6 +37,14 @@ export function Home(props) {
     const value = formData.get("valueToPay");
     const card = formData.get("cardOptions");
 
+    //Função para verificação do pagamento
+    if (card === "1111111111111111") {
+      setPaymentSucced(true);
+    } else {
+      setPaymentUnsucced(true);
+    }
+
+    setIsCardsModalOpen(false);
     console.log(value);
     console.log(card);
   };
@@ -59,8 +69,11 @@ export function Home(props) {
               />
               <select name='cardOptions'>
                 {cards.map((card) => {
-                  console.log(card);
-                  return <option value={card.card_number}>{card.card_number}</option>;
+                  return (
+                    <option value={card.card_number}>
+                      Cartão com final {card.card_number.substring(12)}
+                    </option>
+                  );
                 })}
               </select>
               <button type='submit' className='modal__payButton'>
@@ -89,10 +102,8 @@ export function Home(props) {
       }
       {
         //Modal de pagamento realizado com sucesso
-        false && (
-          <ModalPayment
-            firstSpan='Recibo de pagamento'
-            closeModal={() => setIsCardsModalOpen(false)}>
+        paymentSucced && (
+          <ModalPayment firstSpan='Recibo de pagamento' closeModal={() => setPaymentSucced(false)}>
             <span className='modal__paymentSucced'>O pagamento foi concluido com sucesso!</span>
           </ModalPayment>
         )
@@ -100,11 +111,11 @@ export function Home(props) {
 
       {
         //Modal de pagamento realizado sem sucesso
-        false && (
+        paymentUnsucced && (
           <ModalPayment
             firstSpan='Recibo de pagamento'
-            closeModal={() => setIsCardsModalOpen(false)}>
-            <span className='modal__paymentSucced'>
+            closeModal={() => setPaymentUnsucced(false)}>
+            <span className='modal__paymentUnsucced'>
               O pagamento <strong>não</strong> foi concluido com sucesso!
             </span>
           </ModalPayment>
@@ -113,9 +124,3 @@ export function Home(props) {
     </>
   );
 }
-
-//Função para verificação do pagamento
-function paymentVerification() {}
-
-//Função para cerificação de valor do pagamento
-function checkValue() {}
