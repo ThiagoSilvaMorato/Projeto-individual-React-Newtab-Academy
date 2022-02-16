@@ -30,23 +30,35 @@ export function Home(props) {
   }
 
   //Validação do valor
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const value = formData.get("valueToPay");
     const card = formData.get("cardOptions");
+    const selectedCard = cards.find((cardObject) => cardObject.card_number === card);
 
     //Função para verificação do pagamento
+    const result = await (
+      await fetch("https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989", {
+        method: "POST",
+        body: {
+          card_number: card,
+          cvv: selectedCard.cvv,
+          expiry_date: selectedCard.expiry_date,
+
+          destination_user_id: paymentForUser.id,
+
+          value: value,
+        },
+      })
+    ).json();
     if (card === "1111111111111111") {
       setPaymentSucced(true);
     } else {
       setPaymentUnsucced(true);
     }
-
     setIsCardsModalOpen(false);
-    console.log(value);
-    console.log(card);
   };
 
   return (
