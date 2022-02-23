@@ -22,7 +22,7 @@ export function Home(props) {
   }
 
   //Hook de efeitos colaterais
-  useEffect(getUsers, []);
+  useEffect(() => getUsers(), []);
 
   function handleButtonOnClick(user) {
     setPaymentForUser(user);
