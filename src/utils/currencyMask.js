@@ -7,7 +7,7 @@ export function currencyMask(e) {
 //Formatando moeda
 function formatCurrency(value) {
   var valueToFormat = String(value)
-    .replace(/[a-zA-Z\$\., ]/g, "")
+    .replace(/[a-zA-Z$., ]/g, "")
     .replace(/^(0*)/g, "");
   valueToFormat = valueToFormat.split("").reverse();
 
@@ -24,7 +24,7 @@ function formatCurrency(value) {
   arrayPoint[0] = arrayPoint[0].split("").reverse();
 
   for (let index = 2; index < arrayPoint[0].length; index++) {
-    if (index % 3 == 0) {
+    if (index % 3 === 0) {
       arrayPoint[0][index] = arrayPoint[0][index] + ".";
     }
   }
